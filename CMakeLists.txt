@@ -9,6 +9,13 @@ set(CMAKE_CONFIG_DIR etc/OpenFace)
 set(CONFIG_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_CONFIG_DIR}")
 add_definitions(-DCONFIG_DIR="${CONFIG_DIR}")
 
+# make static linked executables
+# see https://stackoverflow.com/questions/24648357/compiling-a-static-executable-with-cmake
+
+SET(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
+SET(BUILD_SHARED_LIBS OFF)
+SET(CMAKE_EXE_LINKER_FLAGS "-static")
+
 # make sure we'll use OpenBLAS only: there's a header file naming difference between different
 # implementations; so OpenFace wants OpenBLAS;
 find_package(OpenBLAS REQUIRED)
